@@ -1,0 +1,160 @@
+html, body {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+    letter-spacing: 0;
+    font-weight: 400;
+    font-style: normal;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    color: #212121;
+    font-size: 18px;
+    line-height: 1.618em;
+    background: #efefef;
+}
+
+main {
+    font-size: 1em;
+    line-height: 1.618em;
+    color: #757575;
+    padding: 0 20px;
+    max-width: 100%;
+}
+
+.container {
+    max-width: 46rem;
+    margin: 0 auto;
+}
+
+a {
+    color: #A069FF;
+    text-decoration: none;
+}
+
+#toolbar {
+    color: white;
+    height: 56px;
+    line-height: 56px;
+    box-shadow: rgba(0, 0, 0, 0.3) 0px 0px 4px;
+    position: relative;
+    background: #A069FF;
+    padding: 0px 20px;
+    z-index: 5;
+    user-select: none;
+    -webkit-transition-property: background-color;
+    transition-property: background-color;
+    transition-duration: 0.05s;
+}
+
+#toolbar svg {
+    padding: 16px;
+    margin-right: -16px;
+    margin-left: auto;
+    float: right;
+}
+
+video {
+    object-fit: cover;
+    min-width: 100%;
+    height: calc(100% - 55px);
+    position: fixed;
+    top: calc(50% + 27px);
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+#dot {
+    position: fixed;
+    z-index: 1;
+    top: calc(50% + 28px);
+    left: 50%;
+    height: 40px;
+    width: 40px;
+    transform: translate(-50%, -50%);
+    border: 1px solid white;
+    box-shadow: 0 0 1px #212121;
+    border-radius: 50%;
+    -webkit-transition-property: background-color;
+    transition-property: background-color;
+    transition-duration: 0.2s;
+}
+
+#modal {
+    display: block;
+    position: fixed;
+    background-color: #FFF;
+    width: 100%;
+    list-style: none;
+    height: calc(100% - 56px);
+    padding: 0;
+    overflow-y: auto;
+    visibility: hidden;
+    will-change: transform;
+    bottom: 0;
+    left: 0;
+    margin: 0;
+    transform: translate3d(0, 100%, 0);
+    -webkit-transition-property: visibility, transform;
+    transition-property: visibility, transform;
+    transition-duration: 0.2s;
+    z-index: 4;
+}
+
+#modal.opened {
+    visibility: visible;
+    -webkit-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+}
+
+#modal li {
+    height: 56px;
+    line-height: 56px;
+    padding: 0 20px;
+    color: white;
+}
+
+#modal svg {
+    padding: 16px;
+    margin-right: -16px;
+    float: right;
+}
+
+#detector button {
+    position: fixed;
+    z-index: 3;
+    width: 100%;
+    height: calc(100% - 56px);
+    opacity: 0;
+}
+
+#detector span {
+    position: fixed;
+    bottom: 56px;
+    left: 0;
+    width: 100%;
+    color: white;
+    z-index: 2;
+    text-align: center;
+    font-size: 14px;
+    text-transform: uppercase;
+    user-select: none;
+}
+
+.count {
+    position: absolute;
+    top: 14px;
+    right: 16px;
+    background: #F44336;
+    border: 3px solid #F44336;
+    height: 8px;
+    line-height: 8px;
+    width: 8px;
+    border-radius: 50%;
+    text-align: center;
+    font-size: 8px;
+    pointer-events: none;
+    display: inline-block;
+    vertical-align: middle;
+}

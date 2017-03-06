@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>Rainbow Explorer</title>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+
+  <!-- Web Application Manifest -->
+  <link rel="manifest" href="./manifest.json">
+
+  <!-- Add to homescreen for Chrome on Android -->
+  <meta name="mobile-web-app-capable" content="yes">
+
+  <!-- Color the status bar on mobile devices -->
+  <meta name="theme-color" content="#A069FF">
+
+  <link rel="stylesheet" href="./main.css">
+</head>
+
+<body>
+  <div class="no-support-shell">
+    <header>
+      <div class="container">
+        <span>Rainbow Explorer</span>
+      </div>
+    </header>
+    <main>
+      <div class="container">
+        <p>This application is built with <a href="https://preactjs.com/">Preact</a> and requires Javascript to work.</p>
+        <p>To use this application support for getUserMedia() is also required which your browser sadly doesn't have. A list
+          of supported browsers can be found <a href="http://caniuse.com/#feat=stream">here</a>.</p>
+      </div>
+    </main>
+  </div>
+  <script>
+    if (navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia) {
+      document.querySelector('.no-support-shell').outerHTML = '';
+      const tag = document.createElement('script');
+      tag.src = './build/bundle.js';
+      document.querySelector('body').appendChild(tag);
+    }
+    if ('serviceWorker' in navigator) navigator.serviceWorker.register('./sw.js');
+  </script>
+</body>
+
+</html>

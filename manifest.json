@@ -1,0 +1,27 @@
+{
+  "name": "Rainbow Explorer",
+  "short_name": "Explorer",
+  "icons": [
+    {
+      "src": "./images/touch/RE_144.png",
+      "type": "image/png",
+      "sizes": "144x144"
+    },
+    {
+      "src": "./images/touch/RE_192.png",
+      "type": "image/png",
+      "sizes": "192x192"
+    },
+    {
+      "src": "./images/touch/RE_512.png",
+      "type": "image/png",
+      "sizes": "512x512"
+    }
+  ],
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "rotation": "portrait",
+  "background_color": "#A069FF",
+  "theme_color": "#A069FF"
+}
