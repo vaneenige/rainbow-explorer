@@ -12,6 +12,7 @@ const staticFiles = [
  */
 self.addEventListener('install', (event) => {
   self.skipWaiting();
+
   event.waitUntil(
     caches.open(CACHE_NAME).then(cache => cache.addAll(staticFiles))
   );
@@ -30,7 +31,6 @@ self.addEventListener('fetch', (event) => {
   }
 });
 
-
 /**
  * Clean up old cache versions
  */
@@ -41,9 +41,9 @@ self.addEventListener('activate', (event) => {
         if (!expectedCaches.includes(key)) {
           return caches.delete(key);
         }
-      }),
+      })
     )).then(() => {
       console.log(`${CACHE_NAME} now ready to handle fetches!`);
-    }),
+    })
   );
 });
