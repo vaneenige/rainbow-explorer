@@ -14,19 +14,46 @@ export default class Detector extends Component {
   }
 
   componentDidMount() {
-    this.getUserMedia();
+    this.initUserMedia();
+    this.getUserMedia(this.props.facingMode);
   }
 
-  shouldComponentUpdate = ({ collection }) => {
+  shouldComponentUpdate = ({ collection, facingMode }) => {
+    if (facingMode !== this.props.facingMode) {
+      this.getUserMedia(facingMode);
+    }
     if (collection) {
       this.video.pause();
-    } else {
+    } else if (this.video.paused === true) {
       this.video.play();
     }
     return false;
-  };
+  }
 
-  getUserMedia() {
+  getUserMedia(facingMode) {
+    if (this.video.srcObject) {
+      this.video.srcObject.getTracks().map(t => t.stop());
+    }
+    navigator.mediaDevices.getUserMedia({
+      video: {
+        width: { ideal: 1200 },
+        height: { ideal: 1920 },
+        facingMode: { exact: facingMode ? 'environment' : 'user' },
+        frameRate: { ideal: 60, max: 60 },
+      },
+    }).then((stream) => {
+      if ('srcObject' in this.video) {
+        this.video.srcObject = stream;
+      } else {
+        this.video.src = window.URL.createObjectURL(stream);
+      }
+      this.video.onloadedmetadata = () => {
+        this.userMediaLoaded();
+      };
+    });
+  }
+
+  initUserMedia() {
     if (navigator.mediaDevices === undefined) {
       navigator.mediaDevices = {};
     }
@@ -43,24 +70,11 @@ export default class Detector extends Component {
       };
     }
 
-    navigator.mediaDevices.getUserMedia({
-      video: {
-        width: { ideal: 1200 },
-        height: { ideal: 1920 },
-        facingMode: { exact: 'environment' },
-        frameRate: { ideal: 60, max: 60 },
-      },
-    }).then((stream) => {
-      if ('srcObject' in this.video) {
-        this.video.srcObject = stream;
-      } else {
-        this.video.src = window.URL.createObjectURL(stream);
-      }
-      this.video.onloadedmetadata = (e) => {
-        this.video.play();
-        this.userMediaLoaded();
-      };
-    });
+    if (navigator.mediaDevices.enumerateDevices() !== undefined) {
+      navigator.mediaDevices.enumerateDevices().then((devices) => {
+        this.props.setMultipleVideoSources(devices.filter(device => device.kind === 'videoinput').length > 1);
+      });
+    }
   }
 
   userMediaLoaded() {
@@ -84,7 +98,7 @@ export default class Detector extends Component {
     this.props.addColor(this.props.current);
   }
 
-  render({ current }) {
+  render() {
     return (
       <div id="detector">
         <button onClick={this.snap}>Button</button>

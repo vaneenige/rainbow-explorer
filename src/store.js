@@ -24,12 +24,24 @@ const ACTIONS = {
     collection: toggleState,
     ...state,
   }),
+
+  SET_FACING_MODE: ({ facingMode, ...state }, { toggleState }) => ({
+    facingMode: toggleState,
+    ...state,
+  }),
+
+  SET_MULTIPLE_VIDEO_SOURCES: ({ multipleVideoSources, ...state }, { toggleState }) => ({
+    multipleVideoSources: toggleState,
+    ...state,
+  }),
 };
 
 const INITIAL = {
   colors: loadState('colors') || [],
   current: '',
   collection: false,
+  facingMode: true,
+  multipleVideoSources: false,
 };
 
 const store = createStore((state, action) => (
