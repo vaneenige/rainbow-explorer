@@ -24,7 +24,7 @@ export default class Detector extends Component {
     }
     if (collection) {
       this.video.pause();
-    } else if (this.video.paused === true) {
+    } else if (this.video.paused === true && this.props.current !== '') {
       this.video.play();
     }
     return false;
