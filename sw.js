@@ -1,4 +1,4 @@
-const CACHE_NAME = 'rainbow-explorer-v01';
+const CACHE_NAME = 'rainbow-explorer-v02';
 const expectedCaches = [CACHE_NAME];
 const staticFiles = [
   './',
